@@ -1,4 +1,5 @@
 package net.jacob.rpg;
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,23 +22,23 @@ public class RPGGui extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = -8837602785864913600L;
-	static public JLabel curtext;
-	static JLabel health;
-	static JLabel level;
-	static JLabel xp;
-	static public JLabel mobhealth;
-	static public JButton forward;
-	static public JButton no;
-	static JPanel infowrap;
-	static JPanel healthbaroutline;
-	static JPanel healthbar;
+	public JLabel curtext;
+	JLabel health;
+	JLabel level;
+	JLabel xp;
+	public JLabel mobhealth;
+	public JButton forward;
+	public JButton no;
+	JPanel infowrap;
+	JPanel healthbaroutline;
+	JPanel healthbar;
 	JPanel bottomwrap;
 	GridBagConstraints cons;
 	Border border= BorderFactory.createLineBorder(Color.BLACK);
 	Container frame = getContentPane();
 	public static int ticker = 0;
 	
-	public static RPGGui rpg;
+	
 	
 	public RPGGui(){
 		super("UltraRPG");
@@ -132,17 +133,13 @@ public class RPGGui extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 	}
-	
-	public static void createFrame() {
-		rpg = new RPGGui();
-	}
 
-	public static void setDialog(String dialog) {
+	public void setDialog(String dialog) {
 		curtext.setText(dialog);
 		curtext.validate();
 	}
 	
-	public static void healthchange() {
+	public void healthchange() {
 		int healthamt = RPG.health;
 		int maxhealth = 50+(RPG.level*50);
 		double ratio;
@@ -163,21 +160,21 @@ public class RPGGui extends JFrame{
 		healthbaroutline.add(healthbar, BorderLayout.LINE_START);
 	}
 	
-	public static void mobhealthchange(int mobhealthamt) {
+	public void mobhealthchange(int mobhealthamt) {
 		
 		mobhealth.setText("Monster HP: " + mobhealthamt);
 		mobhealth.validate();
 		
 	}
 	
-	public static void lvlchange(){
+	public void lvlchange(){
 		
 		level.setText("Level: " + RPG.level);
 		level.validate();
 		
 	}
 	
-	public static void xpchange(){
+	public void xpchange(){
 		
 		xp.setText("Exp: " + RPG.experience + "/100");
 		xp.validate();

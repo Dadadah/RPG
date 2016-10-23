@@ -1,6 +1,6 @@
 package net.jacob.rpg;
-import java.util.Random;
 
+import java.util.Random;
 
 public class GameCycle {
 	static int searchamt;
@@ -86,11 +86,11 @@ public class GameCycle {
 					mobamt = (10*moblvl)+10;
 				}else{
 					while (d == 0){
-						RPGGui.setDialog("Searching...");
+						RPG.rpg.setDialog("Searching...");
 						Thread.sleep(250);
 					}
 					while(d == 1){
-						RPGGui.setDialog("You couldn't find anything!");
+						RPG.rpg.setDialog("You couldn't find anything!");
 						Thread.sleep(250);
 					}
 					mobamt = 0;
@@ -99,19 +99,19 @@ public class GameCycle {
 				}
 				if (nomob == 0) {
 					while (d == 0){
-						RPGGui.setDialog("Searching...");
+						RPG.rpg.setDialog("Searching...");
 						Thread.sleep(250);
 					}
 					while (d == 1){
-						RPGGui.setDialog("Found One!");
+						RPG.rpg.setDialog("Found One!");
 						Thread.sleep(250);
 					}
 					if (d == 2){
-						RPGGui.mobhealth.setVisible(true);
-					    RPGGui.mobhealthchange(mobhealth);
+						RPG.rpg.mobhealth.setVisible(true);
+						RPG.rpg.mobhealthchange(mobhealth);
 					}
 					while (d == 2){
-						RPGGui.setDialog("Monster: " +name+" Level: "+moblvl+" Damage: "+moblvl+" Health: "+mobhealth);
+						RPG.rpg.setDialog("Monster: " +name+" Level: "+moblvl+" Damage: "+moblvl+" Health: "+mobhealth);
 						Thread.sleep(250);
 					}
 					while(mobhealth >=1){
@@ -121,54 +121,54 @@ public class GameCycle {
 					    if (mobhealth < 0) {
 					    	mobhealth = 0;
 					    }
-					    RPGGui.mobhealthchange(mobhealth);
+					    RPG.rpg.mobhealthchange(mobhealth);
 						while (d == 0){
-							RPGGui.setDialog("You attack the "+name+" and deal "+playerdamage+" damage!");
+							RPG.rpg.setDialog("You attack the "+name+" and deal "+playerdamage+" damage!");
 							Thread.sleep(250);
 						}
 						mobdamage = 1+search.nextInt(10)*moblvl;
 					    RPG.health = RPG.health-mobdamage;
-				    	RPGGui.healthchange();
+					    RPG.rpg.healthchange();
 						while (d == 1){
-							RPGGui.setDialog("The "+name+" " + attackType +" you and does "+mobdamage+" damage!");
+							RPG.rpg.setDialog("The "+name+" " + attackType +" you and does "+mobdamage+" damage!");
 							Thread.sleep(250);
 						}
 					    if (RPG.health <=0){
 					    	d = 0;
 					    	while (d == 0){
-					    		RPGGui.setDialog("Sorry You Lost!");
+					    		RPG.rpg.setDialog("Sorry You Lost!");
 								Thread.sleep(250);
 					    	}
 					    	mobhealth = 0;
 					    	k++;
 					    }
 					    if (d == -100) {
-							RPGGui.mobhealth.setVisible(false);
+					    	RPG.rpg.mobhealth.setVisible(false);
 					    	break;
 					    }
 					}
 					if (RPG.health >= 1 && mobhealth <=0){
-						RPGGui.mobhealth.setVisible(false);
+						RPG.rpg.mobhealth.setVisible(false);
 						exp = mobamt/RPG.level;
 					    RPG.experience = RPG.experience+exp;
-					    RPGGui.xpchange();
+					    RPG.rpg.xpchange();
 					    d = 0;
 					    while (d == 0){
-					    	RPGGui.setDialog("Gratz, you won! You gained "+exp+" experience!");
+					    	RPG.rpg.setDialog("Gratz, you won! You gained "+exp+" experience!");
 							Thread.sleep(250);
 					    }
 					    if (RPG.experience >= 100){
 					    	RPG.level = RPG.level + 1;
-					    	RPGGui.lvlchange();
+					    	RPG.rpg.lvlchange();
 					    	RPG.experience = 0;
-						    RPGGui.xpchange();
+					    	RPG.rpg.xpchange();
 					    	RPG.damage = RPG.damage + 1;
 					    	while (d == 1){
-					    		RPGGui.setDialog("CONGRATZ YOU LEVELED UP!!! Your attack has increased to "+RPG.damage+" and your health has increased by 50!!!");
+					    		RPG.rpg.setDialog("CONGRATZ YOU LEVELED UP!!! Your attack has increased to "+RPG.damage+" and your health has increased by 50!!!");
 								Thread.sleep(250);
 					    	}
 					    	RPG.health = 50+(RPG.level*50);
-					    	RPGGui.healthchange();
+					    	RPG.rpg.healthchange();
 					    }
 					}
 				}
