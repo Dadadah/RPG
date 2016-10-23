@@ -1,3 +1,4 @@
+package net.jacob.rpg;
 import java.io.*;
 import java.util.Scanner;
 import javax.swing.JOptionPane;

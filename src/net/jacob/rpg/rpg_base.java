@@ -1,3 +1,4 @@
+package net.jacob.rpg;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 

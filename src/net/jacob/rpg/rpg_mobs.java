@@ -1,3 +1,4 @@
+package net.jacob.rpg;
 import java.util.Random;
 
 
