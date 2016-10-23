@@ -2,7 +2,7 @@ package net.jacob.rpg;
 import java.util.Random;
 
 
-public class rpg_mobs {
+public class GameCycle {
 	static int searchamt;
 	static int d;
 	public static int k = 0;
@@ -18,67 +18,67 @@ public class rpg_mobs {
 		k = 0;
 		String name = "";
 		String attackType = "";
-		rpg_pane.ticker = 1;
+		RPGGui.ticker = 1;
 		while(k == 0) {
 			d = 0;
-			searchamt = 1+search.nextInt(rpg_base.level+1);
+			searchamt = 1+search.nextInt(RPG.level+1);
 			nomob = 0;
 			if (searchamt > 0 && searchamt < 11) {
-				if (rpg_base.level >= 1 && searchamt == 1) {
+				if (RPG.level >= 1 && searchamt == 1) {
 					name = "Bat";
 					attackType = "bites";
 					moblvl = 1;
 					mobhealth = 10;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 2 && searchamt == 2) {
+				}else if (RPG.level >= 2 && searchamt == 2) {
 					name = "Scorpion";
 					attackType = "stings";
 					moblvl = 2;
 					mobhealth = 30;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 3 && searchamt == 3) {
+				}else if (RPG.level >= 3 && searchamt == 3) {
 					name = "Wolf";
 					attackType = "claws";
 					moblvl = 3;
 					mobhealth = 50;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 4 && searchamt == 4) {
+				}else if (RPG.level >= 4 && searchamt == 4) {
 					name = "Giant Snail";
 					attackType = "runs over";
 					moblvl = 4;
 					mobhealth = 80;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 5 && searchamt == 5) {
+				}else if (RPG.level >= 5 && searchamt == 5) {
 					name = "FLYING FROG!";
 					attackType = "licks";
 					moblvl = 5;
 					mobhealth = 100;
 					mobamt = (10*moblvl)+10;
-				}else if (rpg_base.level >= 6 && searchamt == 6) {
+				}else if (RPG.level >= 6 && searchamt == 6) {
 					name = "Crab";
 					attackType = "snaps at";
 					moblvl = 6;
 					mobhealth = 120;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 7 && searchamt == 7) {
+				}else if (RPG.level >= 7 && searchamt == 7) {
 					name = "Duck";
 					attackType = "bites";
 					moblvl = 7;
 					mobhealth = 150;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 8 && searchamt == 8) {
+				}else if (RPG.level >= 8 && searchamt == 8) {
 					name = "Penguin";
 					attackType = "smacks";
 					moblvl = 8;
 					mobhealth = 230;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 9 && searchamt == 9) {
+				}else if (RPG.level >= 9 && searchamt == 9) {
 					name = "Platapus";
 					attackType = "smacks";
 					moblvl = 9;
 					mobhealth = 270;
 					mobamt = 10*moblvl;
-				}else if (rpg_base.level >= 10 && searchamt == 10) {
+				}else if (RPG.level >= 10 && searchamt == 10) {
 					name = "TURTLE!";
 					attackType = "bites";
 					moblvl = 10;
@@ -86,11 +86,11 @@ public class rpg_mobs {
 					mobamt = (10*moblvl)+10;
 				}else{
 					while (d == 0){
-						rpg_pane.setDialog("Searching...");
+						RPGGui.setDialog("Searching...");
 						Thread.sleep(250);
 					}
 					while(d == 1){
-						rpg_pane.setDialog("You couldn't find anything!");
+						RPGGui.setDialog("You couldn't find anything!");
 						Thread.sleep(250);
 					}
 					mobamt = 0;
@@ -99,76 +99,76 @@ public class rpg_mobs {
 				}
 				if (nomob == 0) {
 					while (d == 0){
-						rpg_pane.setDialog("Searching...");
+						RPGGui.setDialog("Searching...");
 						Thread.sleep(250);
 					}
 					while (d == 1){
-						rpg_pane.setDialog("Found One!");
+						RPGGui.setDialog("Found One!");
 						Thread.sleep(250);
 					}
 					if (d == 2){
-						rpg_pane.mobhealth.setVisible(true);
-					    rpg_pane.mobhealthchange(mobhealth);
+						RPGGui.mobhealth.setVisible(true);
+					    RPGGui.mobhealthchange(mobhealth);
 					}
 					while (d == 2){
-						rpg_pane.setDialog("Monster: " +name+" Level: "+moblvl+" Damage: "+moblvl+" Health: "+mobhealth);
+						RPGGui.setDialog("Monster: " +name+" Level: "+moblvl+" Damage: "+moblvl+" Health: "+mobhealth);
 						Thread.sleep(250);
 					}
 					while(mobhealth >=1){
 						if(d != -100)d=0;
-						playerdamage = 1+search.nextInt(10)*rpg_base.damage;
+						playerdamage = 1+search.nextInt(10)*RPG.damage;
 					    mobhealth = mobhealth-playerdamage;
 					    if (mobhealth < 0) {
 					    	mobhealth = 0;
 					    }
-					    rpg_pane.mobhealthchange(mobhealth);
+					    RPGGui.mobhealthchange(mobhealth);
 						while (d == 0){
-							rpg_pane.setDialog("You attack the "+name+" and deal "+playerdamage+" damage!");
+							RPGGui.setDialog("You attack the "+name+" and deal "+playerdamage+" damage!");
 							Thread.sleep(250);
 						}
 						mobdamage = 1+search.nextInt(10)*moblvl;
-					    rpg_base.health = rpg_base.health-mobdamage;
-				    	rpg_pane.healthchange();
+					    RPG.health = RPG.health-mobdamage;
+				    	RPGGui.healthchange();
 						while (d == 1){
-							rpg_pane.setDialog("The "+name+" " + attackType +" you and does "+mobdamage+" damage!");
+							RPGGui.setDialog("The "+name+" " + attackType +" you and does "+mobdamage+" damage!");
 							Thread.sleep(250);
 						}
-					    if (rpg_base.health <=0){
+					    if (RPG.health <=0){
 					    	d = 0;
 					    	while (d == 0){
-					    		rpg_pane.setDialog("Sorry You Lost!");
+					    		RPGGui.setDialog("Sorry You Lost!");
 								Thread.sleep(250);
 					    	}
 					    	mobhealth = 0;
 					    	k++;
 					    }
 					    if (d == -100) {
-							rpg_pane.mobhealth.setVisible(false);
+							RPGGui.mobhealth.setVisible(false);
 					    	break;
 					    }
 					}
-					if (rpg_base.health >= 1 && mobhealth <=0){
-						rpg_pane.mobhealth.setVisible(false);
-						exp = mobamt/rpg_base.level;
-					    rpg_base.experience = rpg_base.experience+exp;
-					    rpg_pane.xpchange();
+					if (RPG.health >= 1 && mobhealth <=0){
+						RPGGui.mobhealth.setVisible(false);
+						exp = mobamt/RPG.level;
+					    RPG.experience = RPG.experience+exp;
+					    RPGGui.xpchange();
 					    d = 0;
 					    while (d == 0){
-					    	rpg_pane.setDialog("Gratz, you won! You gained "+exp+" experience!");
+					    	RPGGui.setDialog("Gratz, you won! You gained "+exp+" experience!");
 							Thread.sleep(250);
 					    }
-					    if (rpg_base.experience >= 100){
-					    	rpg_base.level = rpg_base.level + 1;
-					    	rpg_pane.lvlchange();
-					    	rpg_base.experience = 0;
-						    rpg_pane.xpchange();
-					    	rpg_base.damage = rpg_base.damage + 1;
+					    if (RPG.experience >= 100){
+					    	RPG.level = RPG.level + 1;
+					    	RPGGui.lvlchange();
+					    	RPG.experience = 0;
+						    RPGGui.xpchange();
+					    	RPG.damage = RPG.damage + 1;
 					    	while (d == 1){
-					    		rpg_pane.setDialog("CONGRATZ YOU LEVELED UP!!! Your attack has increased to "+rpg_base.damage+" and your health has increased by 50!!!");
+					    		RPGGui.setDialog("CONGRATZ YOU LEVELED UP!!! Your attack has increased to "+RPG.damage+" and your health has increased by 50!!!");
 								Thread.sleep(250);
 					    	}
-					    	rpg_base.health = 50+(rpg_base.level*50);
-					    	rpg_pane.healthchange();
+					    	RPG.health = 50+(RPG.level*50);
+					    	RPGGui.healthchange();
 					    }
 					}
 				}

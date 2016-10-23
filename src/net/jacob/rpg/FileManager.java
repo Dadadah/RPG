@@ -3,15 +3,15 @@ import java.io.*;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
-public class rpg_save {
+public class FileManager {
 	static int lvl;
 	static int esp;
 	static String name;
     public static void save() throws IOException{
     	PrintWriter outputFile = new PrintWriter("Saves.txt");
-    	outputFile.println(rpg_base.level);
-    	outputFile.println(rpg_base.experience);
-    	outputFile.println(rpg_base.Name);
+    	outputFile.println(RPG.level);
+    	outputFile.println(RPG.experience);
+    	outputFile.println(RPG.Name);
     	outputFile.close();
     }
     public static void load() throws FileNotFoundException { 	

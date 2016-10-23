@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class rpg_pane extends JFrame{
+public class RPGGui extends JFrame{
 	
 	/**
 	 * 
@@ -37,20 +37,20 @@ public class rpg_pane extends JFrame{
 	Container frame = getContentPane();
 	public static int ticker = 0;
 	
-	public static rpg_pane rpg;
+	public static RPGGui rpg;
 	
-	public rpg_pane(){
+	public RPGGui(){
 		super("UltraRPG");
 
 		forward = new JButton("Continue");
 		forward.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (ticker) {
-				case 0: rpg_base.cont++;
+				case 0: RPG.cont++;
 					break;
-				case 1:	rpg_mobs.d++;
+				case 1:	GameCycle.d++;
 					break;
-				case 2: rpg_base.yes++;
+				case 2: RPG.yes++;
 					break;
 				}
 		}});
@@ -61,13 +61,13 @@ public class rpg_pane extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				switch (ticker) {
 				case 0: break;
-				case 1:	rpg_mobs.k++;
-						rpg_mobs.d = -100;
-						rpg_base.cont = 0;
-						rpg_base.yes = 0;
-						rpg_base.no = 0;
+				case 1:	GameCycle.k++;
+						GameCycle.d = -100;
+						RPG.cont = 0;
+						RPG.yes = 0;
+						RPG.no = 0;
 					break;
-				case 2: rpg_base.no++;
+				case 2: RPG.no++;
 					break;
 				}
 		}});
@@ -134,7 +134,7 @@ public class rpg_pane extends JFrame{
 	}
 	
 	public static void createFrame() {
-		rpg = new rpg_pane();
+		rpg = new RPGGui();
 	}
 
 	public static void setDialog(String dialog) {
@@ -143,8 +143,8 @@ public class rpg_pane extends JFrame{
 	}
 	
 	public static void healthchange() {
-		int healthamt = rpg_base.health;
-		int maxhealth = 50+(rpg_base.level*50);
+		int healthamt = RPG.health;
+		int maxhealth = 50+(RPG.level*50);
 		double ratio;
 		int size;
 		
@@ -172,14 +172,14 @@ public class rpg_pane extends JFrame{
 	
 	public static void lvlchange(){
 		
-		level.setText("Level: " + rpg_base.level);
+		level.setText("Level: " + RPG.level);
 		level.validate();
 		
 	}
 	
 	public static void xpchange(){
 		
-		xp.setText("Exp: " + rpg_base.experience + "/100");
+		xp.setText("Exp: " + RPG.experience + "/100");
 		xp.validate();
 		
 	}

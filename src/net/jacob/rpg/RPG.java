@@ -3,7 +3,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 
-public class rpg_base {
+public class RPG {
 	static int level;
 	static int health;
 	static int damage;
@@ -15,32 +15,32 @@ public class rpg_base {
 	static String aa [] = {"Load game", "New game"};
 	public static void main(String[] args) throws IOException, InterruptedException {
 		int k = 0;
-		rpg_pane.createFrame();
+		RPGGui.createFrame();
 		String a = (String)JOptionPane.showInputDialog(null, "Load game or New game?", "Start", JOptionPane.INFORMATION_MESSAGE,null, aa, aa[1]);
 		if (a == "New game"){
 			level = 1;
 			experience = 0;
 			health = 50+(level*50);
-	    	rpg_pane.healthchange();
+	    	RPGGui.healthchange();
 			damage = level;
-			Name =  (String)JOptionPane.showInputDialog("What is your name?");
+			Name = (String)JOptionPane.showInputDialog("What is your name?");
 			int g = JOptionPane.showConfirmDialog(null, "Are you ready to begin "+Name+"?\nYour stats begin at Level 1, Damage 1, and 100 HP.", "Begin", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if (g == JOptionPane.YES_OPTION){
-				rpg_mobs.mobs();
+				GameCycle.mobs();
 			}
 		}else{
-			rpg_save.load();	
-			level = rpg_save.lvl;
-	    	rpg_pane.lvlchange();
-			experience = rpg_save.esp;
-	    	rpg_pane.xpchange();
+			FileManager.load();	
+			level = FileManager.lvl;
+	    	RPGGui.lvlchange();
+			experience = FileManager.esp;
+	    	RPGGui.xpchange();
 			health = 50+(level*50);
-	    	rpg_pane.healthchange();
+	    	RPGGui.healthchange();
 			damage = level;
-			Name = rpg_save.name;
-			rpg_pane.no.setVisible(false);
+			Name = FileManager.name;
+			RPGGui.no.setVisible(false);
 			while (cont == 0) {
-				rpg_pane.setDialog("Hello, welcome back "+Name+"!");
+				RPGGui.setDialog("Hello, welcome back " + Name + "!");
 				Thread.sleep(250);
 			}
 		}
@@ -48,43 +48,43 @@ public class rpg_base {
 			if (health <= 0) {
 				k++;
 			}else{
-				rpg_pane.no.setVisible(false);
+				RPGGui.no.setVisible(false);
 				cont = 0;
 				yes = 0;
 				no = 0;
-				rpg_pane.ticker = 0;
+				RPGGui.ticker = 0;
 				while (cont == 0){
-					rpg_pane.setDialog("Welcome to town!");
+					RPGGui.setDialog("Welcome to town!");
 					Thread.sleep(250);
 				}
 				health = 50+(level*50);
-		    	rpg_pane.healthchange();
+		    	RPGGui.healthchange();
 				while (cont == 1){
-					rpg_pane.setDialog("You have been fully healed!");
+					RPGGui.setDialog("You have been fully healed!");
 					Thread.sleep(250);
 				}
-				rpg_pane.ticker = 2;
-				rpg_pane.forward.setText("Yes");
-				rpg_pane.no.setText("No");
-				rpg_pane.no.setVisible(true);
+				RPGGui.ticker = 2;
+				RPGGui.forward.setText("Yes");
+				RPGGui.no.setText("No");
+				RPGGui.no.setVisible(true);
 				while (cont == 2){
-					rpg_pane.setDialog("Go back and fight?");
+					RPGGui.setDialog("Go back and fight?");
 					Thread.sleep(250);
 					if (yes == 1) {
-						rpg_pane.forward.setText("Continue");
-						rpg_pane.no.setText("Back to town");
-						rpg_mobs.mobs();
+						RPGGui.forward.setText("Continue");
+						RPGGui.no.setText("Back to town");
+						GameCycle.mobs();
 					}
 					while(no == 1) {
-						rpg_pane.setDialog("Save Game?");
+						RPGGui.setDialog("Save Game?");
 						if (yes == 1){
-							rpg_save.save();
-							rpg_pane.rpg.dispose();
+							FileManager.save();
+							RPGGui.rpg.dispose();
 							return;
 						}
 					}
 					if (no == 2){
-						rpg_pane.rpg.dispose();
+						RPGGui.rpg.dispose();
 						return;
 					}
 				}
