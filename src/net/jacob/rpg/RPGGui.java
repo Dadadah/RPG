@@ -30,6 +30,7 @@ public class RPGGui extends JFrame{
 	public JLabel mobhealth;
 	public JButton forward;
 	public JButton no;
+	JButton statWindow;
 	JPanel infowrap;
 	JPanel healthbaroutline;
 	JPanel healthbar;
@@ -69,9 +70,24 @@ public class RPGGui extends JFrame{
 					break;
 				case 2: RPG.no++;
 					break;
+			
+		
+		
 				}
 		}});
 		no.setPreferredSize(new Dimension(200, 30));
+		
+		statWindow = new JButton("Stats");
+		statWindow.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		
+		});
+		
 		
 		cons = new GridBagConstraints();
 		
@@ -116,11 +132,11 @@ public class RPGGui extends JFrame{
 		healthbar = new JPanel();
 		healthbar.setBorder(border);
 		healthbar.setBackground(Color.RED);
-		healthbar.setPreferredSize(new Dimension(198, 28));
+		healthbar.setPreferredSize(new Dimension(398, 28));
 		
 		healthbaroutline = new JPanel(new BorderLayout());
 		healthbaroutline.setBorder(border);
-		healthbaroutline.setPreferredSize(new Dimension(200, 30));
+		healthbaroutline.setPreferredSize(new Dimension(400, 30));
 		healthbaroutline.add(healthbar, BorderLayout.LINE_START);
 		
 		bottomwrap = new JPanel(new GridBagLayout());
@@ -164,7 +180,7 @@ public class RPGGui extends JFrame{
 			healthamt = 0;
 		}
 		
-		ratio = (healthamt*198) / maxhealth;
+		ratio = (healthamt*398) / maxhealth;
 		
 		size = (int) Math.round(ratio);
 		
