@@ -119,7 +119,7 @@ public class Player {
 		intillect++;
 		stamina++;
 		defence++;
-		maxHealth = 50+(level*50);
+		maxHealth = 50+(stamina*13);
 		heal();
 	}
 }

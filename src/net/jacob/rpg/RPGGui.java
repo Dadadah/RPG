@@ -23,6 +23,10 @@ public class RPGGui extends JFrame{
 	JLabel health;
 	JLabel level;
 	JLabel xp;
+	JLabel strength;
+	JLabel intillect;
+	JLabel stamina;
+	JLabel defence;
 	public JLabel mobhealth;
 	public JButton forward;
 	public JButton no;
@@ -86,12 +90,28 @@ public class RPGGui extends JFrame{
 		xp = new JLabel("Exp: 0/100");
 		xp.setPreferredSize(new Dimension(100, 10));
 		
+		strength = new JLabel("Str: 3");
+		strength.setPreferredSize(new Dimension(100, 10));
+		
+		intillect = new JLabel("Int: 5");
+		intillect.setPreferredSize(new Dimension(100, 10));
+		
+		stamina = new JLabel("Stam: 1");
+		stamina.setPreferredSize(new Dimension(100, 10));
+		
+		defence = new JLabel("Def: 1");
+		defence.setPreferredSize(new Dimension(100, 10));
+		
 		infowrap = new JPanel(new GridLayout(2,2));
-		infowrap.setPreferredSize(new Dimension(200, 30));
+		infowrap.setPreferredSize(new Dimension(400, 60));
 		infowrap.add(health);
 		infowrap.add(mobhealth);
 		infowrap.add(level);
 		infowrap.add(xp);
+		infowrap.add(strength);
+		infowrap.add(intillect);
+		infowrap.add(stamina);
+		infowrap.add(defence);
 		
 		healthbar = new JPanel();
 		healthbar.setBorder(border);
@@ -175,5 +195,22 @@ public class RPGGui extends JFrame{
 		xp.validate();
 		
 	}
+
+	public void statchange(){
+		
+		strength.setText("Str: " + RPG.ply.getStrength());
+		strength.validate();
+		
+		intillect.setText("Int: " + RPG.ply.getIntillect());
+		intillect.validate();
+		
+		stamina.setText("Stam: " + RPG.ply.getStamina());
+		stamina.validate();
+		
+		defence.setText("Def: " + RPG.ply.getDefence());
+		defence.validate();
+		
+	}
+	
 	
 }
