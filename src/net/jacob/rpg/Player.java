@@ -13,18 +13,18 @@ public class Player {
 	private int defence;
 	
 	private final String name;
-	
-	public Player(String name, int level, int experience, int maxHealth, int strength, int intillect, int stamina, int defence) {
+
+	public Player(String name) {
 		this.name = name;
-		this.level = level;
-		this.experience = experience;
-		this.maxHealth = maxHealth;
+		this.level = 1;
+		this.experience = 0;
+		this.strength = 1;
+		this.intillect = 1;
+		this.stamina = 1;
+		this.defence = 1;
+		this.maxHealth = 50+(this.level*50);
 		this.health = this.maxHealth;
-		this.damage = this.level;
-		this.strength = strength;
-		this.intillect = intillect;
-		this.stamina = stamina;
-		this.defence = defence;
+		this.damage = this.strength;
 	}
 	
 	public Player(String name, int level, int experience, int maxHealth) {
@@ -39,6 +39,19 @@ public class Player {
 		this.stamina = 1;
 		this.defence = 1;	
 		
+	}
+	
+	public Player(String name, int level, int experience, int maxHealth, int strength, int intillect, int stamina, int defence) {
+		this.name = name;
+		this.level = level;
+		this.experience = experience;
+		this.maxHealth = maxHealth;
+		this.health = this.maxHealth;
+		this.damage = this.level;
+		this.strength = strength;
+		this.intillect = intillect;
+		this.stamina = stamina;
+		this.defence = defence;
 	}
 	
 	public int getMaxHealth() {

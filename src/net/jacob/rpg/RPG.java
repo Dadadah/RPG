@@ -9,9 +9,6 @@ public class RPG {
 	static int yes = 0;
 	static Player ply;
 	
-	static final int startLevel = 1;
-	static final int startMaxHealth = 50+(startLevel*50);
-	
 	static String aa [] = {"Load game", "New game"};
 	
 	public static RPGGui rpg;
@@ -22,7 +19,7 @@ public class RPG {
 		String a = (String)JOptionPane.showInputDialog(null, "Load game or New game?", "Start", JOptionPane.INFORMATION_MESSAGE,null, aa, aa[1]);
 		if (a == "New game"){
 			String name = (String)JOptionPane.showInputDialog("What is your name?");
-			ply = new Player(name, startLevel, 0, startMaxHealth);
+			ply = new Player(name);
 			rpg.healthchange();
 			int g = JOptionPane.showConfirmDialog(null, "Would you like to go out and adventure?", "Begin", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if (g == JOptionPane.YES_OPTION){
