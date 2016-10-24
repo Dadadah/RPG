@@ -49,19 +49,19 @@ public class Player {
 		return health;
 	}
 	
-	public int getstrength() {
+	public int getStrength() {
 		return strength;
 	}
 	
-	public int getintillect(){
+	public int getIntillect(){
 		return intillect;
 	}
 	
-	public int getstamina(){
+	public int getStamina(){
 		return stamina;
 	}
 	
-	public int getdefence(){
+	public int getDefence(){
 		return defence;
 	}
 	
