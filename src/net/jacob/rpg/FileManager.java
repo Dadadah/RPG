@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class FileManager {
 	static int lvl;
-	static int esp;
+	static int exp;
 	static String name;
     public static void save() throws IOException{
     	PrintWriter outputFile = new PrintWriter("Saves.txt");
@@ -20,7 +20,7 @@ public class FileManager {
     	if(file.exists()){
     		Scanner read = new Scanner(file);
     		lvl = read.nextInt();
-    		esp = read.nextInt();
+    		exp = read.nextInt();
     		name = read.next();  		
     		read.close();
     	}else{

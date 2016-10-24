@@ -30,7 +30,7 @@ public class RPG {
 			}
 		}else{
 			FileManager.load();
-			ply = new Player(FileManager.name, FileManager.lvl, FileManager.esp, (50+(FileManager.lvl*50)));
+			ply = new Player(FileManager.name, FileManager.lvl, FileManager.exp, (50+(FileManager.lvl*50)));
 			rpg.lvlchange();
 			rpg.xpchange();
 			rpg.healthchange();
