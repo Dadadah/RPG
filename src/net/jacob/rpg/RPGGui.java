@@ -182,35 +182,14 @@ public class RPGGui extends JFrame{
 		
 	}
 	
-	public void lvlchange(){
-		
+	public void refreshGUI() {
 		level.setText("Level: " + RPG.ply.getLevel());
-		level.validate();
-		
-	}
-	
-	public void xpchange(){
-		
 		xp.setText("Exp: " + RPG.ply.getExperience() + "/100");
-		xp.validate();
-		
-	}
-
-	public void statchange(){
-		
 		strength.setText("Str: " + RPG.ply.getStrength());
-		strength.validate();
-		
 		intillect.setText("Int: " + RPG.ply.getIntillect());
-		intillect.validate();
-		
 		stamina.setText("Stam: " + RPG.ply.getStamina());
-		stamina.validate();
-		
 		defence.setText("Def: " + RPG.ply.getDefence());
-		defence.validate();
-		
-	}
-	
+		infowrap.validate();
+	}	
 	
 }

@@ -86,7 +86,7 @@ public class GameCycle {
 						RPG.rpg.mobhealth.setVisible(false);
 						exp = mob.getExperience()/RPG.ply.getLevel();
 					    boolean leveled = RPG.ply.addExperience(exp);
-					    RPG.rpg.xpchange();
+					    RPG.rpg.refreshGUI();
 					    d = 0;
 					    while (d == 0){
 					    	RPG.rpg.setDialog("Gratz, you won! You gained "+exp+" experience!");
@@ -94,7 +94,6 @@ public class GameCycle {
 					    }
 					    while (d == 1 && leveled){
 					    	RPG.rpg.setDialog("Level up!");
-					    	RPG.rpg.lvlchange();
 							Thread.sleep(250);
 					    }
 					    leveled = false;

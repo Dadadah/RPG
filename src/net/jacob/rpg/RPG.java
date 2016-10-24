@@ -27,8 +27,7 @@ public class RPG {
 			}
 		}else{
 			ply = FileManager.load();
-			rpg.lvlchange();
-			rpg.xpchange();
+			rpg.refreshGUI();
 			rpg.healthchange();
 			rpg.no.setVisible(false);
 			while (cont == 0) {
