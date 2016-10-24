@@ -26,8 +26,7 @@ public class RPG {
 				GameCycle.mobs();
 			}
 		}else{
-			FileManager.load();
-			ply = new Player(FileManager.name, FileManager.lvl, FileManager.exp, (50+(FileManager.lvl*50)));
+			ply = FileManager.load();
 			rpg.lvlchange();
 			rpg.xpchange();
 			rpg.healthchange();
@@ -71,7 +70,7 @@ public class RPG {
 					while(no == 1) {
 						rpg.setDialog("Save Game?");
 						if (yes == 1){
-							FileManager.save();
+							FileManager.save(ply);
 							rpg.dispose();
 							return;
 						}

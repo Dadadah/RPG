@@ -5,26 +5,27 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class FileManager {
-	static int lvl;
-	static int exp;
-	static String name;
-	static int strength;
-	static int intillect;
-	static int stamina;
-	static int defence;
+	private static int lvl;
+	private static int exp;
+	private static String name;
+	private static int strength;
+	private static int intillect;
+	private static int stamina;
+	private static int defence;
 	
-    public static void save() throws IOException{
+    public static void save(Player ply) throws IOException{
     	PrintWriter outputFile = new PrintWriter("Saves.txt");
-    	outputFile.println(RPG.ply.getLevel());
-    	outputFile.println(RPG.ply.getExperience());
-    	outputFile.println(RPG.ply.getName());
-    	outputFile.println(RPG.ply.getStrength());
-    	outputFile.println(RPG.ply.getIntillect());
-    	outputFile.println(RPG.ply.getStamina());
-    	outputFile.println(RPG.ply.getDefence());
+    	outputFile.println(ply.getLevel());
+    	outputFile.println(ply.getExperience());
+    	outputFile.println(ply.getName());
+    	outputFile.println(ply.getStrength());
+    	outputFile.println(ply.getIntillect());
+    	outputFile.println(ply.getStamina());
+    	outputFile.println(ply.getDefence());
     	outputFile.close();
     }
-    public static void load() throws FileNotFoundException { 	
+    
+    public static Player load() throws FileNotFoundException { 	
     	File file = new File("Saves.txt");
     	if(file.exists()){
     		Scanner read = new Scanner(file);
@@ -37,9 +38,10 @@ public class FileManager {
     		defence = read.nextInt();
     		 
     		read.close();
+    		return new Player(name, lvl, exp, strength, intillect, stamina, defence);
     	}else{
     		JOptionPane.showMessageDialog(null, "File Failed to load!\nCould not load stats!", "Error", 0);
-    		lvl = 1;
+    		return new Player("Bob");
     	}
     }
 }
