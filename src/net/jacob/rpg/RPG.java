@@ -13,6 +13,7 @@ public class RPG {
 	static int experience;
 	static String Name;
 	static String aa [] = {"Load game", "New game"};
+	static int maxHealth;
 	
 	public static RPGGui rpg;
 	
@@ -23,11 +24,12 @@ public class RPG {
 		if (a == "New game"){
 			level = 1;
 			experience = 0;
-			health = 50+(level*50);
-	    	rpg.healthchange();
+			maxHealth = 50+(level*50);
+			health = maxHealth;
+			rpg.healthchange();
 			damage = level;
 			Name = (String)JOptionPane.showInputDialog("What is your name?");
-			int g = JOptionPane.showConfirmDialog(null, "Are you ready to begin "+Name+"?\nYour stats begin at Level 1, Damage 1, and 100 HP.", "Begin", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			int g = JOptionPane.showConfirmDialog(null, "Are you ready to begin "+Name+"?\nYour stats begin at level "+level+", "+maxHealth+"hp, and "+damage+" damage.", "Begin", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if (g == JOptionPane.YES_OPTION){
 				GameCycle.mobs();
 			}
