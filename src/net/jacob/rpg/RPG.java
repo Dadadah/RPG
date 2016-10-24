@@ -4,16 +4,15 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class RPG {
-	static int level;
-	static int health;
-	static int damage;
 	static int cont = 0;
 	static int no = 0;
 	static int yes = 0;
-	static int experience;
-	static String Name;
+	static Player ply;
+	
+	static final int startLevel = 1;
+	static final int startMaxHealth = 50+(startLevel*50);
+	
 	static String aa [] = {"Load game", "New game"};
-	static int maxHealth;
 	
 	public static RPGGui rpg;
 	
@@ -22,35 +21,27 @@ public class RPG {
 		rpg = new RPGGui();
 		String a = (String)JOptionPane.showInputDialog(null, "Load game or New game?", "Start", JOptionPane.INFORMATION_MESSAGE,null, aa, aa[1]);
 		if (a == "New game"){
-			level = 1;
-			experience = 0;
-			maxHealth = 50+(level*50);
-			health = maxHealth;
+			String name = (String)JOptionPane.showInputDialog("What is your name?");
+			ply = new Player(name, startLevel, 0, startMaxHealth);
 			rpg.healthchange();
-			damage = level;
-			Name = (String)JOptionPane.showInputDialog("What is your name?");
-			int g = JOptionPane.showConfirmDialog(null, "Are you ready to begin "+Name+"?\nYour stats begin at level "+level+", "+maxHealth+"hp, and "+damage+" damage.", "Begin", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			int g = JOptionPane.showConfirmDialog(null, "Would you like to go out and adventure?", "Begin", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if (g == JOptionPane.YES_OPTION){
 				GameCycle.mobs();
 			}
 		}else{
-			FileManager.load();	
-			level = FileManager.lvl;
+			FileManager.load();
+			ply = new Player(FileManager.name, FileManager.lvl, FileManager.esp, (50+(FileManager.lvl*50)));
 			rpg.lvlchange();
-			experience = FileManager.esp;
 			rpg.xpchange();
-			health = 50+(level*50);
 			rpg.healthchange();
-			damage = level;
-			Name = FileManager.name;
 			rpg.no.setVisible(false);
 			while (cont == 0) {
-				rpg.setDialog("Hello, welcome back " + Name + "!");
+				rpg.setDialog("Hello, welcome back " + ply.getName() + "!");
 				Thread.sleep(250);
 			}
 		}
 		while (k == 0) {
-			if (health <= 0) {
+			if (ply.getHealth() <= 0) {
 				k++;
 			}else{
 				rpg.no.setVisible(false);
@@ -62,7 +53,7 @@ public class RPG {
 					rpg.setDialog("Welcome to town!");
 					Thread.sleep(250);
 				}
-				health = 50+(level*50);
+				ply.heal();
 				rpg.healthchange();
 				while (cont == 1){
 					rpg.setDialog("You have been fully healed!");

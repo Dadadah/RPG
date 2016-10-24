@@ -10,9 +10,9 @@ public class FileManager {
 	static String name;
     public static void save() throws IOException{
     	PrintWriter outputFile = new PrintWriter("Saves.txt");
-    	outputFile.println(RPG.level);
-    	outputFile.println(RPG.experience);
-    	outputFile.println(RPG.Name);
+    	outputFile.println(RPG.ply.getLevel());
+    	outputFile.println(RPG.ply.getExperience());
+    	outputFile.println(RPG.ply.getName());
     	outputFile.close();
     }
     public static void load() throws FileNotFoundException { 	

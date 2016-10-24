@@ -16,10 +16,10 @@ public class GameCycle {
 		RPGGui.ticker = 1;
 		while(k == 0) {
 			d = 0;
-			searchamt = 1+search.nextInt(RPG.level+1);
+			searchamt = 1+search.nextInt(RPG.ply.getLevel()+1);
 			nomob = 0;
 			if (searchamt > 0 && searchamt < 11) {
-				if (searchamt < RPG.level+1) {
+				if (searchamt < RPG.ply.getLevel()+1) {
 					mob = new Monster(searchamt);
 				}else{
 					while (d == 0){
@@ -51,7 +51,7 @@ public class GameCycle {
 					}
 					while(mob.getHealth() >=1){
 						if(d != -100)d=0;
-						playerdamage = 1+search.nextInt(10)*RPG.damage;
+						playerdamage = 1+search.nextInt(10)*RPG.ply.getDamage();
 						mob.setHealth(mob.getHealth()-playerdamage);
 					    if (mob.getHealth() < 0) {
 					    	mob.setHealth(0);
@@ -62,13 +62,13 @@ public class GameCycle {
 							Thread.sleep(250);
 						}
 						int mobdamage = 1+search.nextInt(10)*mob.getLevel();
-					    RPG.health = RPG.health-mobdamage;
+						RPG.ply.setHealth(RPG.ply.getHealth()-mobdamage);
 					    RPG.rpg.healthchange();
 						while (d == 1){
 							RPG.rpg.setDialog("The " + mob.getName() + " " + mob.getAttackType() +" you and does "+mobdamage+" damage!");
 							Thread.sleep(250);
 						}
-					    if (RPG.health <=0){
+					    if (RPG.ply.getHealth() <=0){
 					    	d = 0;
 					    	while (d == 0){
 					    		RPG.rpg.setDialog("Sorry You Lost!");
@@ -82,29 +82,22 @@ public class GameCycle {
 					    	break;
 					    }
 					}
-					if (RPG.health >= 1 && mob.getHealth() <=0){
+					if (RPG.ply.getHealth() >= 1 && mob.getHealth() <=0){
 						RPG.rpg.mobhealth.setVisible(false);
-						exp = mob.getExperience()/RPG.level;
-					    RPG.experience = RPG.experience+exp;
+						exp = mob.getExperience()/RPG.ply.getLevel();
+					    boolean leveled = RPG.ply.addExperience(exp);
 					    RPG.rpg.xpchange();
 					    d = 0;
 					    while (d == 0){
 					    	RPG.rpg.setDialog("Gratz, you won! You gained "+exp+" experience!");
 							Thread.sleep(250);
 					    }
-					    if (RPG.experience >= 100){
-					    	RPG.level = RPG.level + 1;
+					    while (d == 1 && leveled){
+					    	RPG.rpg.setDialog("Level up!");
 					    	RPG.rpg.lvlchange();
-					    	RPG.experience = 0;
-					    	RPG.rpg.xpchange();
-					    	RPG.damage = RPG.damage + 1;
-					    	while (d == 1){
-					    		RPG.rpg.setDialog("CONGRATZ YOU LEVELED UP!!! Your attack has increased to "+RPG.damage+" and your health has increased by 50!!!");
-								Thread.sleep(250);
-					    	}
-					    	RPG.health = 50+(RPG.level*50);
-					    	RPG.rpg.healthchange();
+							Thread.sleep(250);
 					    }
+					    leveled = false;
 					}
 				}
 			}

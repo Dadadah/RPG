@@ -1,4 +1,5 @@
 package net.jacob.rpg;
+
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,9 +18,6 @@ import javax.swing.JPanel;
 
 public class RPGGui extends JFrame{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8837602785864913600L;
 	public JLabel curtext;
 	JLabel health;
@@ -137,8 +135,8 @@ public class RPGGui extends JFrame{
 	}
 	
 	public void healthchange() {
-		int healthamt = RPG.health;
-		int maxhealth = 50+(RPG.level*50);
+		int healthamt = RPG.ply.getHealth();
+		int maxhealth = RPG.ply.getMaxHealth();
 		double ratio;
 		int size;
 		
@@ -166,14 +164,14 @@ public class RPGGui extends JFrame{
 	
 	public void lvlchange(){
 		
-		level.setText("Level: " + RPG.level);
+		level.setText("Level: " + RPG.ply.getLevel());
 		level.validate();
 		
 	}
 	
 	public void xpchange(){
 		
-		xp.setText("Exp: " + RPG.experience + "/100");
+		xp.setText("Exp: " + RPG.ply.getExperience() + "/100");
 		xp.validate();
 		
 	}
