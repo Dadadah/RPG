@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 public class RPGGui extends JFrame{
 	
 	private static final long serialVersionUID = -8837602785864913600L;
+	private StatWindowGUI statWindow;
 	public JLabel curtext;
 	JLabel health;
 	JLabel level;
@@ -26,7 +27,7 @@ public class RPGGui extends JFrame{
 	public JLabel mobhealth;
 	public JButton forward;
 	public JButton no;
-	JButton statWindow;
+	JButton stats;
 	JPanel infowrap;
 	JPanel healthbaroutline;
 	JPanel healthbar;
@@ -34,7 +35,6 @@ public class RPGGui extends JFrame{
 	GridBagConstraints cons;
 	Border border= BorderFactory.createLineBorder(Color.BLACK);
 	Container frame = getContentPane();
-	private static int statwindowchangervaluethisistoolongjacobkillmenow = 0;
 	public static int ticker = 0;
 	
 	public RPGGui(){
@@ -74,19 +74,18 @@ public class RPGGui extends JFrame{
 		}});
 		no.setPreferredSize(new Dimension(200, 30));
 		
-		statWindow = new JButton("Stats");
-		statWindow.addActionListener(new ActionListener(){
+		stats = new JButton("Stats");
+		stats.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				switch (statwindowchangervaluethisistoolongjacobkillmenow) {
-				case 0:
-					break;
-				case 1:	
-					break;
-		
-				
+				if (statWindow == null) {
+					statWindow = new StatWindowGUI();
+				}else{
+					statWindow.dispose();
+					statWindow = null;
+				}
 			}
-		}});
-		statWindow.setPreferredSize(new Dimension(200, 30));
+		});
+		stats.setPreferredSize(new Dimension(200, 30));
 		
 		cons = new GridBagConstraints();
 		
@@ -136,7 +135,7 @@ public class RPGGui extends JFrame{
 		bottomwrap.add(no, cons);
 		cons.gridx = 0;
 		cons.gridy = 1;
-		bottomwrap.add(statWindow, cons);
+		bottomwrap.add(stats, cons);
 		cons.gridx = 1;
 		cons.gridy = 2;
 		bottomwrap.add(infowrap, cons);
@@ -150,7 +149,7 @@ public class RPGGui extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 	}
-/////////////////////////////////////////////////////////////////////////////////	
+
 	public void setDialog(String dialog) {
 		curtext.setText(dialog);
 		curtext.validate();

@@ -19,25 +19,21 @@ import javax.swing.JPanel;
 public class StatWindowGUI extends JFrame {
 	 
 	private static final long serialVersionUID = -6306962275032814101L;
-	public JLabel curtext;
 	JLabel strength;
 	JLabel intillect;
 	JLabel stamina;
 	JLabel defence;
 	JButton statWindow;
-	JPanel infoWrap;
-	JPanel bottomwrap;
 	GridBagConstraints cons;
-	Border border= BorderFactory.createLineBorder(Color.BLACK);
 	Container frame = getContentPane();
 	
 	public StatWindowGUI(){
 		super("Stats");
 		
-		strength = new JLabel("Str: 3");
+		strength = new JLabel("Str: 1");
 		strength.setPreferredSize(new Dimension(100, 10));
 
-		intillect = new JLabel("Int: 5");
+		intillect = new JLabel("Int: 1");
 		intillect.setPreferredSize(new Dimension(100, 10));
 
 		stamina = new JLabel("Stam: 1");
@@ -46,22 +42,23 @@ public class StatWindowGUI extends JFrame {
 		defence = new JLabel("Def: 1");
 		defence.setPreferredSize(new Dimension(100, 10));
 		
-		infoWrap = new JPanel(new GridLayout(2,2));
-		infoWrap.setPreferredSize(new Dimension(400, 60));
-		infoWrap.add(strength);
-		infoWrap.add(intillect);
-		infoWrap.add(stamina);
-		infoWrap.add(defence);
+		frame.setLayout(new GridBagLayout());
 		
-		bottomwrap = new JPanel(new GridBagLayout());
+		cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.HORIZONTAL;
 		cons.gridx = 1;
 		cons.gridy = 0;
-		bottomwrap.add(infoWrap, cons);
-		
-		frame.setLayout(new BorderLayout());
-		frame.add(bottomwrap, BorderLayout.SOUTH);
-		frame.add(curtext, BorderLayout.CENTER);
+		frame.add(strength, cons);
+		cons.gridx = 0;
+		cons.gridy = 0;
+		cons.anchor = GridBagConstraints.NORTH;
+		frame.add(intillect, cons);
+		cons.gridx = 1;
+		cons.gridy = 1;
+		frame.add(stamina, cons);
+		cons.gridx = 0;
+		cons.gridy = 1;
+		frame.add(defence, cons);
 		
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
