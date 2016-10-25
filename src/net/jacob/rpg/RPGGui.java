@@ -51,8 +51,10 @@ public class RPGGui extends JFrame{
 					RPG.cont++;
 					break;
 				case 1:	
-					RPG.cycle.d++;
-					RPG.cycle.threadSuspended = true;
+					RPG.cycle.threadSuspended = false;
+					synchronized(RPG.cycle) {
+						RPG.cycle.notify();
+					}
 					break;
 				case 2: 
 					RPG.cycle.yes++;
