@@ -23,10 +23,6 @@ public class RPGGui extends JFrame{
 	JLabel health;
 	JLabel level;
 	JLabel xp;
-	JLabel strength;
-	JLabel intillect;
-	JLabel stamina;
-	JLabel defence;
 	public JLabel mobhealth;
 	public JButton forward;
 	public JButton no;
@@ -38,6 +34,7 @@ public class RPGGui extends JFrame{
 	GridBagConstraints cons;
 	Border border= BorderFactory.createLineBorder(Color.BLACK);
 	Container frame = getContentPane();
+	private static int statwindowchangervaluethisistoolongjacobkillmenow = 0;
 	public static int ticker = 0;
 	
 	public RPGGui(){
@@ -79,15 +76,17 @@ public class RPGGui extends JFrame{
 		
 		statWindow = new JButton("Stats");
 		statWindow.addActionListener(new ActionListener(){
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				switch (statwindowchangervaluethisistoolongjacobkillmenow) {
+				case 0:
+					break;
+				case 1:	
+					break;
+		
 				
 			}
-		
-		});
-		
+		}});
+		statWindow.setPreferredSize(new Dimension(200, 30));
 		
 		cons = new GridBagConstraints();
 		
@@ -106,37 +105,21 @@ public class RPGGui extends JFrame{
 		xp = new JLabel("Exp: 0/100");
 		xp.setPreferredSize(new Dimension(100, 10));
 		
-		strength = new JLabel("Str: 3");
-		strength.setPreferredSize(new Dimension(100, 10));
-		
-		intillect = new JLabel("Int: 5");
-		intillect.setPreferredSize(new Dimension(100, 10));
-		
-		stamina = new JLabel("Stam: 1");
-		stamina.setPreferredSize(new Dimension(100, 10));
-		
-		defence = new JLabel("Def: 1");
-		defence.setPreferredSize(new Dimension(100, 10));
-		
 		infowrap = new JPanel(new GridLayout(2,2));
-		infowrap.setPreferredSize(new Dimension(400, 60));
+		infowrap.setPreferredSize(new Dimension(200, 30));
 		infowrap.add(health);
 		infowrap.add(mobhealth);
 		infowrap.add(level);
 		infowrap.add(xp);
-		infowrap.add(strength);
-		infowrap.add(intillect);
-		infowrap.add(stamina);
-		infowrap.add(defence);
 		
 		healthbar = new JPanel();
 		healthbar.setBorder(border);
 		healthbar.setBackground(Color.RED);
-		healthbar.setPreferredSize(new Dimension(398, 28));
+		healthbar.setPreferredSize(new Dimension(198, 28));
 		
 		healthbaroutline = new JPanel(new BorderLayout());
 		healthbaroutline.setBorder(border);
-		healthbaroutline.setPreferredSize(new Dimension(400, 30));
+		healthbaroutline.setPreferredSize(new Dimension(200, 30));
 		healthbaroutline.add(healthbar, BorderLayout.LINE_START);
 		
 		bottomwrap = new JPanel(new GridBagLayout());
@@ -153,6 +136,9 @@ public class RPGGui extends JFrame{
 		bottomwrap.add(no, cons);
 		cons.gridx = 0;
 		cons.gridy = 1;
+		bottomwrap.add(statWindow, cons);
+		cons.gridx = 1;
+		cons.gridy = 2;
 		bottomwrap.add(infowrap, cons);
 
 		frame.setLayout(new BorderLayout());
@@ -164,7 +150,7 @@ public class RPGGui extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 	}
-	
+/////////////////////////////////////////////////////////////////////////////////	
 	public void setDialog(String dialog) {
 		curtext.setText(dialog);
 		curtext.validate();
@@ -180,7 +166,7 @@ public class RPGGui extends JFrame{
 			healthamt = 0;
 		}
 		
-		ratio = (healthamt*398) / maxhealth;
+		ratio = (healthamt*198) / maxhealth;
 		
 		size = (int) Math.round(ratio);
 		
@@ -201,10 +187,6 @@ public class RPGGui extends JFrame{
 	public void refreshGUI() {
 		level.setText("Level: " + RPG.ply.getLevel());
 		xp.setText("Exp: " + RPG.ply.getExperience() + "/100");
-		strength.setText("Str: " + RPG.ply.getStrength());
-		intillect.setText("Int: " + RPG.ply.getIntillect());
-		stamina.setText("Stam: " + RPG.ply.getStamina());
-		defence.setText("Def: " + RPG.ply.getDefence());
 		infowrap.validate();
 	}	
 	
