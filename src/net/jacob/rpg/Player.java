@@ -1,18 +1,12 @@
 package net.jacob.rpg;
 
-public class Player {
+public class Player extends AbstractEntity{
 	
-	private int level;
-	private int experience;
-	private int maxHealth;
-	private int health;
 	private int damage;
 	private int strength;
 	private int intillect;
 	private int stamina;
 	private int defence;
-	
-	private final String name;
 
 	public Player(String name) {
 		this.name = name;
@@ -31,8 +25,8 @@ public class Player {
 		this.name = name;
 		this.level = level;
 		this.experience = experience;
-		this.strength = 3;
-		this.intillect = 5;
+		this.strength = 1;
+		this.intillect = 1;
 		this.stamina = 1;
 		this.defence = 1;
 		this.maxHealth = 50+(stamina*13);
@@ -54,14 +48,6 @@ public class Player {
 		this.damage = this.level;
 	}
 	
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public int getHealth() {
-		return health;
-	}
-	
 	public int getStrength() {
 		return strength;
 	}
@@ -77,25 +63,9 @@ public class Player {
 	public int getDefence(){
 		return defence;
 	}
-	
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public int getDamage() {
 		return damage;
-	}
-
-	public int getExperience() {
-		return experience;
 	}
 	
 	public boolean addExperience(int experience) {
@@ -105,10 +75,6 @@ public class Player {
 			return true;
 		}
 		return false;
-	}
-	
-	public void heal() {
-		this.health = this.maxHealth;
 	}
 	
 	public void levelUp() {

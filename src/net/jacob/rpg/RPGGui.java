@@ -47,11 +47,15 @@ public class RPGGui extends JFrame{
 		forward.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (ticker) {
-				case 0: RPG.cont++;
+				case 0: 
+					RPG.cont++;
 					break;
-				case 1:	GameCycle.d++;
+				case 1:	
+					RPG.cycle.d++;
+					RPG.cycle.threadSuspended = true;
 					break;
-				case 2: RPG.yes++;
+				case 2: 
+					RPG.cycle.yes++;
 					break;
 				}
 		}});
@@ -62,13 +66,18 @@ public class RPGGui extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				switch (ticker) {
 				case 0: break;
-				case 1:	GameCycle.k++;
-						GameCycle.d = -100;
-						RPG.cont = 0;
-						RPG.yes = 0;
-						RPG.no = 0;
+				case 1:	
+					if (RPG.cycle.k.equals("Town")) {
+						RPG.cycle.k = "Dungeon";
+					} else {
+						RPG.cycle.k = "Town";
+					}
+					RPG.cont = 0;
+					RPG.cycle.yes = 0;
+					RPG.cycle.no = 0;
 					break;
-				case 2: RPG.no++;
+				case 2: 
+					RPG.cycle.no++;
 					break;
 			
 		

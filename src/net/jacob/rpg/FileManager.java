@@ -13,21 +13,26 @@ public class FileManager {
 	private static int stamina;
 	private static int defence;
 	
-    public static void save(Player ply) throws IOException{
-    	PrintWriter outputFile = new PrintWriter("Saves.txt");
-    	outputFile.println(ply.getLevel());
-    	outputFile.println(ply.getExperience());
-    	outputFile.println(ply.getName());
-    	outputFile.println(ply.getStrength());
-    	outputFile.println(ply.getIntillect());
-    	outputFile.println(ply.getStamina());
-    	outputFile.println(ply.getDefence());
-    	outputFile.close();
+    public static void save(Player ply){
+    	PrintWriter outputFile;
+		try {
+			outputFile = new PrintWriter("Saves.txt");
+	    	outputFile.println(ply.getLevel());
+	    	outputFile.println(ply.getExperience());
+	    	outputFile.println(ply.getName());
+	    	outputFile.println(ply.getStrength());
+	    	outputFile.println(ply.getIntillect());
+	    	outputFile.println(ply.getStamina());
+	    	outputFile.println(ply.getDefence());
+	    	outputFile.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Error saving file!");
+		}
     }
     
-    public static Player load() throws FileNotFoundException { 	
+    public static Player load() {
     	File file = new File("Saves.txt");
-    	if(file.exists()){
+    	try{
     		Scanner read = new Scanner(file);
     		lvl = read.nextInt();
     		exp = read.nextInt();
@@ -38,9 +43,11 @@ public class FileManager {
     		defence = read.nextInt();
     		 
     		read.close();
+    		
     		return new Player(name, lvl, exp, strength, intillect, stamina, defence);
-    	}else{
-    		JOptionPane.showMessageDialog(null, "File Failed to load!\nCould not load stats!", "Error", 0);
+    	}
+    	catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "File Failed to load!\nCould not load stats!", "Error", 0);
     		return new Player("Bob");
     	}
     }
