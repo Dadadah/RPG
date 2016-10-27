@@ -3,7 +3,6 @@ package net.jacob.rpg;
 import javax.swing.JOptionPane;
 
 public class RPG {
-	static int cont = 0;
 	static Player ply;
 	
 	static String aa [] = {"Load game", "New game"};
@@ -25,11 +24,6 @@ public class RPG {
 			rpg.refreshGUI();
 			rpg.healthchange();
 			rpg.no.setVisible(false);
-			while (cont == 0) {
-				rpg.setDialog("Hello, welcome back " + ply.getName() + "!");
-				Thread.sleep(250);
-			}
-			rpg.no.setVisible(true);
 		}
 		Thread thread = new Thread(cycle);
         thread.start();

@@ -46,19 +46,9 @@ public class RPGGui extends JFrame{
 		forward = new JButton("Continue");
 		forward.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (ticker) {
-				case 0: 
-					RPG.cont++;
-					break;
-				case 1:	
-					RPG.cycle.threadSuspended = false;
-					synchronized(RPG.cycle) {
-						RPG.cycle.notify();
-					}
-					break;
-				case 2: 
-					RPG.cycle.yes++;
-					break;
+				RPG.cycle.threadSuspended = false;
+				synchronized(RPG.cycle) {
+					RPG.cycle.notify();
 				}
 		}});
 		forward.setPreferredSize(new Dimension(200, 30));
@@ -67,23 +57,16 @@ public class RPGGui extends JFrame{
 		no.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (ticker) {
-				case 0: break;
 				case 1:	
-					if (RPG.cycle.k.equals("Town")) {
-						RPG.cycle.k = "Dungeon";
-					} else {
-						RPG.cycle.k = "Town";
-					}
-					RPG.cont = 0;
-					RPG.cycle.yes = 0;
-					RPG.cycle.no = 0;
+					RPG.cycle.setToTown();
 					break;
 				case 2: 
 					RPG.cycle.no++;
 					break;
-			
-		
-		
+				}
+				RPG.cycle.threadSuspended = false;
+				synchronized(RPG.cycle) {
+					RPG.cycle.notify();
 				}
 		}});
 		no.setPreferredSize(new Dimension(200, 30));

@@ -7,11 +7,11 @@ public class GameCycle implements Runnable{
 	int d;
 	String k = "Town";
 	int no = 0;
-	int yes = 0;
 	Random search = new Random();
 	Monster mob;
 	int playerdamage;
 	int exp;
+	boolean firstRun = true;
 	boolean leveled = false;
 	
 	public volatile boolean threadSuspended = false;
@@ -30,7 +30,12 @@ public class GameCycle implements Runnable{
             	
             }
             
-            System.out.println(d);
+            if (firstRun) {
+            	RPG.rpg.setDialog("Hello, welcome back " + RPG.ply.getName() + "!");
+            	firstRun = false;
+                threadSuspended = !threadSuspended;
+            	continue;
+            }
             
             if (k.equals("Dungeon")) {
             	dungeon();
@@ -43,15 +48,16 @@ public class GameCycle implements Runnable{
 	}
 	
 	public void dungeon() {
-		String[] dialogs = {"Searching...", "Found One!"  };
-		//"Monster: " + mob.getName() + " Level: " + mob.getLevel() + " Damage: " + mob.getLevel() + " Health: " + mob.getHealth()
+		String[] dialogs = {"Searching...", "Found One!"};
 		if (d < 2) {
+			RPG.rpg.no.setVisible(true);
 			RPG.rpg.setDialog(dialogs[d]);
 		}
 		if (d == 2){
 			mob = new Monster(RPG.ply.getLevel());
 			RPG.rpg.mobhealth.setVisible(true);
 			RPG.rpg.mobhealthchange(mob.getHealth());
+			RPG.rpg.setDialog("Monster: " + mob.getName() + " Level: " + mob.getLevel() + " Damage: " + mob.getLevel() + " Health: " + mob.getHealth());
 			d = 0;
 		}
 		if (d == 3) d = 0;
@@ -103,50 +109,60 @@ public class GameCycle implements Runnable{
     		RPG.rpg.setDialog("You have died.");
     	}
     	if (d == 7) {
-        	k = "Town";
+        	setToTown();
         	RPG.rpg.mobhealth.setVisible(false);
     	}
 	}
 	
 	public void town() {
-		RPG.rpg.no.setVisible(false);
-		RPG.cont = 0;
-		yes = 0;
-		no = 0;
-		RPGGui.ticker = 0;
-		while (RPG.cont == 0){
+		if (d == 0) {
+			RPG.rpg.no.setVisible(false);
 			RPG.rpg.setDialog("Welcome to town!");
 		}
-		RPG.ply.heal();
-		RPG.rpg.healthchange();
-		while (RPG.cont == 1){
+		if (d == 1) {
+			RPG.ply.heal();
+			RPG.rpg.healthchange();
 			RPG.rpg.setDialog("You have been fully healed!");
 		}
-		RPGGui.ticker = 2;
-		RPG.rpg.forward.setText("Yes");
-		RPG.rpg.no.setText("No");
-		RPG.rpg.no.setVisible(true);
-		while (RPG.cont == 2){
+		if (d == 2) {
+			RPG.rpg.forward.setText("Yes");
+			RPG.rpg.no.setText("No");
+			RPG.rpg.no.setVisible(true);
 			RPG.rpg.setDialog("Go back and fight?");
-			if (yes == 1) {
-				RPG.rpg.forward.setText("Continue");
-				RPG.rpg.no.setText("Back to town");
-				k = "Dungeon";
-				RPGGui.ticker = 1;
-				RPG.cont = 0;
-			}
-			while(no == 1) {
-				RPG.rpg.setDialog("Save Game?");
-				if (yes == 1){
-					FileManager.save(RPG.ply);
-					RPG.rpg.dispose();
-					return;
-				}
-			}
-			if (no == 2){
-				RPG.rpg.dispose();
-				return;
-			}
+			no = 0;
+			RPGGui.ticker = 2;
 		}
+		if (no == 0 && d == 3) {
+			setToDungeon();
+		}
+		if (no == 1 && d == 3) {
+			RPG.rpg.setDialog("Save Game?");
+		}
+		if (no == 1 && d == 4){
+			FileManager.save(RPG.ply);
+			RPG.rpg.dispose();
+			return;
+		}
+		if (no == 2 && d == 4){
+			RPG.rpg.dispose();
+			return;
+		}
+	}
+	
+	public void setToDungeon() {
+		RPG.rpg.forward.setText("Continue");
+		RPG.rpg.no.setText("Back to town");
+		k = "Dungeon";
+		RPGGui.ticker = 1;
+		d = 0;
+		dungeon();
+	}
+	
+	public void setToTown() {
+		RPG.rpg.forward.setText("Continue");
+		k = "Town";
+		RPGGui.ticker = 1;
+		d = 0;
+		town();
 	}
 }
