@@ -1,20 +1,12 @@
 package net.jacob.rpg;
 
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-//import java.awt.event.ActionListener;
-//import java.awt.event.ActionEvent;
-import javax.swing.BorderFactory; 
-import javax.swing.border.Border;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 public class StatWindowGUI extends JFrame {
 	 
@@ -61,7 +53,6 @@ public class StatWindowGUI extends JFrame {
 		frame.add(defence, cons);
 		
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
 	}

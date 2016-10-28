@@ -68,14 +68,14 @@ public class RPGGui extends JFrame{
 		}});
 		no.setPreferredSize(new Dimension(200, 30));
 		
+		statWindow = new StatWindowGUI();
 		stats = new JButton("Stats");
 		stats.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				if (statWindow == null) {
-					statWindow = new StatWindowGUI();
+				if (!statWindow.isVisible()) {
+					statWindow.setVisible(true);
 				}else{
-					statWindow.dispose();
-					statWindow = null;
+					statWindow.setVisible(false);
 				}
 			}
 		});
