@@ -43,13 +43,9 @@ public class RPGGui extends JFrame{
 		forward = new JButton("Continue");
 		forward.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (ticker) {
-				case 0: RPG.cont++;
-					break;
-				case 1:	GameCycle.d++;
-					break;
-				case 2: RPG.yes++;
-					break;
+				RPG.cycle.threadSuspended = false;
+				synchronized(RPG.cycle) {
+					RPG.cycle.notify();
 				}
 		}});
 		forward.setPreferredSize(new Dimension(200, 30));
@@ -58,18 +54,16 @@ public class RPGGui extends JFrame{
 		no.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (ticker) {
-				case 0: break;
-				case 1:	GameCycle.k++;
-						GameCycle.d = -100;
-						RPG.cont = 0;
-						RPG.yes = 0;
-						RPG.no = 0;
+				case 1:	
+					RPG.cycle.setToTown();
 					break;
-				case 2: RPG.no++;
+				case 2: 
+					RPG.cycle.no++;
 					break;
-			
-		
-		
+				}
+				RPG.cycle.threadSuspended = false;
+				synchronized(RPG.cycle) {
+					RPG.cycle.notify();
 				}
 		}});
 		no.setPreferredSize(new Dimension(200, 30));
