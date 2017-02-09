@@ -1,4 +1,4 @@
-package net.jacob.rpg;
+package space.jacobschlecht.www;
 
 import java.io.*;
 import java.util.Scanner;

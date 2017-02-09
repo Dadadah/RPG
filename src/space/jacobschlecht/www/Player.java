@@ -1,4 +1,4 @@
-package net.jacob.rpg;
+package space.jacobschlecht.www;
 
 public class Player extends AbstractEntity{
 	

@@ -1,4 +1,4 @@
-package net.jacob.rpg;
+package space.jacobschlecht.www;
 
 import javax.swing.JFrame;
 import java.awt.Container;

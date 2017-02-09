@@ -1,4 +1,4 @@
-package net.jacob.rpg;
+package space.jacobschlecht.www;
 
 public abstract class AbstractEntity {
 	protected String name;
